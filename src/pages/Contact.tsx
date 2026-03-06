@@ -144,7 +144,7 @@ export default function Contact() {
             <div className="space-y-5">
               {[
                 { icon: Mail, label: 'Email', value: 'hello@cifusion.ai' },
-                { icon: Phone, label: 'Phone', value: '+1 (555) 000-0000' },
+                { icon: Phone, label: 'Phone', value: '+1 (650) 450-8149' },
                 { icon: MapPin, label: 'Office', value: 'Allegiant InfoTech, Global Operations' },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4">
