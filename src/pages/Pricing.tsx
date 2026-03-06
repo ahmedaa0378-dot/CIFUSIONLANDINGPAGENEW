@@ -27,12 +27,11 @@ const tiers = [
   {
     name: 'Enterprise SSO',
     icon: Shield,
-    setup: '$15,000',
-    annual: '$15,000',
     description: 'For organizations requiring single sign-on and enterprise identity management.',
     highlight: true,
     badge: 'MOST POPULAR',
     cta: 'Request a Demo',
+    isCustom: true,
     features: [
       'Dedicated tenant with row-level security',
       'Unlimited employee self-registration',
@@ -53,11 +52,10 @@ const tiers = [
   {
     name: 'Dedicated',
     icon: Crown,
-    setup: '$20,000',
-    annual: '$15,000',
     description: 'Full isolation for regulated industries — pharma, healthcare, aerospace, and defense.',
     highlight: false,
     cta: 'Request a Demo',
+    isCustom: true,
     features: [
       'Everything in Enterprise SSO, plus:',
       'Dedicated database instance',
@@ -73,8 +71,6 @@ const tiers = [
   {
     name: 'Custom',
     icon: Sparkles,
-    setup: null,
-    annual: null,
     description: 'Fully tailored solution with dedicated infrastructure, custom development, and bespoke integrations.',
     highlight: false,
     cta: 'Contact for Quote',
@@ -104,7 +100,7 @@ const faqs = [
   { q: 'Is there a free pilot program?', a: 'Yes! We offer a 30-day guided pilot for qualified organizations. This includes full platform setup for one department, AI configuration, seed data from your operations, and dedicated support from our CI technology team.' },
   { q: 'What does the $1,250 additional seat cover?', a: 'Employee accounts (idea submitters) are completely unlimited at no extra cost. The $1,250 applies only to Manager and CSI Head roles who need approval authority, project management access, advanced analytics, and AI analysis capabilities.' },
   { q: 'How long does implementation take?', a: 'Enterprise SSO: 3-4 weeks including identity provider integration. Dedicated: 4-6 weeks for database provisioning and security review. Custom: Scoped per project. We handle all the technical configuration.' },
-  { q: 'Can we migrate from existing CI tools or spreadsheets?', a: 'Absolutely. We provide data migration support to import your existing ideas, projects, and historical data from spreadsheets, SharePoint, or other CI platforms. Our team will map your existing workflows to CIFusion\'s approval structure.' },
+  { q: 'Can we migrate from existing CI tools or spreadsheets?', a: "Absolutely. We provide data migration support to import your existing ideas, projects, and historical data from spreadsheets, SharePoint, or other CI platforms. Our team will map your existing workflows to CIFusion's approval structure." },
 ];
 
 export default function Pricing() {
@@ -151,21 +147,10 @@ export default function Pricing() {
                 </div>
 
                 <div className="mb-5">
-                  {tier.isCustom ? (
-                    <div>
-                      <span className="font-heading text-2xl font-extrabold gradient-text">Custom Pricing</span>
-                      <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Tailored to your requirements</p>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="flex items-baseline gap-1">
-                        <span className="font-heading text-3xl font-extrabold text-gray-900 dark:text-white">{tier.setup}</span>
-                      </div>
-                      <div className="text-sm text-gray-400 dark:text-gray-500">one-time implementation</div>
-                      <div className="text-base font-bold text-purple-600 dark:text-purple-400 mt-1">{tier.annual} / year</div>
-                      <div className="text-xs text-gray-400 dark:text-gray-500">support & licensing</div>
-                    </div>
-                  )}
+                  <div>
+                    <span className="font-heading text-2xl font-extrabold gradient-text">Custom Pricing</span>
+                    <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Tailored to your requirements</p>
+                  </div>
                 </div>
 
                 <p className="text-sm text-gray-500 dark:text-gray-500 leading-relaxed mb-6">{tier.description}</p>
@@ -191,12 +176,6 @@ export default function Pricing() {
                     ))}
                   </ul>
                 </div>
-
-                {!tier.isCustom && (
-                  <div className="mt-6 p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 text-center">
-                    <p className="text-xs text-gray-400 dark:text-gray-500">+$1,250 per additional Manager or CSI Head</p>
-                  </div>
-                )}
               </div>
             </AnimatedSection>
           ))}
