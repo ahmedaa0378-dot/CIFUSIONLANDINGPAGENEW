@@ -11,6 +11,7 @@ import About from './pages/About';
 import Demo from './pages/Demo';
 import Contact from './pages/Contact';
 import { useState, useEffect } from 'react';
+import Blog from './pages/Blog';
 import ScrollToTop from './components/ScrollToTop';
 
 
@@ -51,6 +52,7 @@ function AppContent() {
             <Route path="/about" element={<About />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/docs" element={<DocsHub />} />
           </Routes>
         </main>
