@@ -15,14 +15,12 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
   const [gsapLoaded, setGsapLoaded] = useState(false);
   const gsapRef = useRef<any>(null);
 
-  // Particle state refs
   const particlesRef = useRef<any[]>([]);
   const explosionRef = useRef<any[]>([]);
   const ambientRef = useRef<any[]>([]);
   const electricArcsRef = useRef<any[]>([]);
   const stateRef = useRef({ particlesActive: false, fusionComplete: false, electricActive: false, W: 0, H: 0 });
 
-  // Load GSAP from CDN
   useEffect(() => {
     if ((window as any).gsap) {
       gsapRef.current = (window as any).gsap;
@@ -38,7 +36,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     document.head.appendChild(script);
   }, []);
 
-  // ============ PARTICLE CLASSES ============
   const createFusionParticle = useCallback(() => {
     const { W, H } = stateRef.current;
     const side = Math.floor(Math.random() * 4);
@@ -62,7 +59,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
       targetX: W / 2 + (Math.random() - 0.5) * 180,
       targetY: H / 2 + (Math.random() - 0.5) * 50,
       size: Math.random() * 2.5 + 1,
-      speed: Math.random() * 0.012 + 0.007,
+      speed: Math.random() * 0.025 + 0.02,
       progress: 0, opacity: Math.random() * 0.7 + 0.3,
       trail: [] as { x: number; y: number }[],
       maxTrail: Math.floor(Math.random() * 6) + 3,
@@ -96,13 +93,11 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     };
   }, []);
 
-  // ============ ELECTRIC ARC ============
   const createElectricArc = useCallback((x1: number, y1: number, x2: number, y2: number) => ({
     x1, y1, x2, y2, life: 1, decay: Math.random() * 0.03 + 0.02,
     segments: Math.floor(Math.random() * 4) + 3,
   }), []);
 
-  // ============ RENDER LOOP ============
   const render = useCallback(() => {
     const canvas = canvasRef.current;
     const elecCanvas = electricCanvasRef.current;
@@ -114,7 +109,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
 
     ctx.clearRect(0, 0, W, H);
 
-    // Ambient
     ambientRef.current.forEach((p) => {
       p.x += p.speedX; p.y += p.speedY;
       if (p.x < -10 || p.x > W + 10 || p.y < -10 || p.y > H + 10) {
@@ -124,7 +118,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
       ctx.fillStyle = `rgba(${p.color},${p.opacity})`; ctx.fill();
     });
 
-    // Fusion particles
     if (particlesActive) {
       let allArrived = true;
       particlesRef.current.forEach((p) => {
@@ -139,7 +132,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
           if (p.trail.length > p.maxTrail) p.trail.shift();
           allArrived = false;
         }
-        // Draw trail
         if (p.trail.length > 1) {
           for (let i = 1; i < p.trail.length; i++) {
             const a = (i / p.trail.length) * p.opacity * 0.3;
@@ -149,7 +141,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
             ctx.lineWidth = p.size * 0.4; ctx.stroke();
           }
         }
-        // Draw glow + core
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
         g.addColorStop(0, `rgba(${p.color.r},${p.color.g},${p.color.b},${p.opacity * 0.5})`);
         g.addColorStop(1, `rgba(${p.color.r},${p.color.g},${p.color.b},0)`);
@@ -164,7 +155,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
       }
     }
 
-    // Explosion particles
     explosionRef.current = explosionRef.current.filter((p) => {
       p.x += p.vx; p.y += p.vy; p.vx *= 0.97; p.vy *= 0.97; p.life -= p.decay;
       if (p.life <= 0) return false;
@@ -173,7 +163,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
       return true;
     });
 
-    // Electric arcs
     if (electricActive && elecCtx && elecCanvas) {
       elecCtx.clearRect(0, 0, elecCanvas.width, elecCanvas.height);
       electricArcsRef.current = electricArcsRef.current.filter((arc) => {
@@ -188,11 +177,9 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
           });
         }
         points.push({ x: arc.x2, y: arc.y2 });
-        // Glow
         elecCtx.beginPath(); elecCtx.moveTo(points[0].x, points[0].y);
         for (let i = 1; i < points.length; i++) elecCtx.lineTo(points[i].x, points[i].y);
         elecCtx.strokeStyle = `rgba(249,115,22,${arc.life * 0.3})`; elecCtx.lineWidth = 3; elecCtx.stroke();
-        // Core
         elecCtx.beginPath(); elecCtx.moveTo(points[0].x, points[0].y);
         for (let i = 1; i < points.length; i++) elecCtx.lineTo(points[i].x, points[i].y);
         elecCtx.strokeStyle = `rgba(255,255,255,${arc.life * 0.8})`; elecCtx.lineWidth = 1; elecCtx.stroke();
@@ -203,7 +190,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     animFrameRef.current = requestAnimationFrame(render);
   }, []);
 
-  // ============ FUSION TRIGGER ============
   const triggerFusion = useCallback(() => {
     const gsap = gsapRef.current;
     if (!gsap) return;
@@ -211,43 +197,36 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
 
     stateRef.current.electricActive = false;
 
-    // Explosion
     for (let i = 0; i < 120; i++) explosionRef.current.push(createBurstParticle(W / 2, H / 2));
 
-    // Flash
     const flash = document.createElement('div');
     flash.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(139,92,246,0.3),transparent 60%);z-index:4;pointer-events:none;';
     containerRef.current?.appendChild(flash);
-    gsap.to(flash, { opacity: 0, duration: 0.8, onComplete: () => flash.remove() });
+    gsap.to(flash, { opacity: 0, duration: 0.5, onComplete: () => flash.remove() });
 
-    // Fade logo and text
-    gsap.to(logoRef.current, { opacity: 0, scale: 0.5, duration: 0.5 });
-    gsap.to(textRef.current, { opacity: 0, duration: 0.3 });
+    gsap.to(logoRef.current, { opacity: 0, scale: 0.5, duration: 0.3 });
+    gsap.to(textRef.current, { opacity: 0, duration: 0.2 });
 
-    // Fade particles
     const fadeObj = { val: 1 };
-    gsap.to(fadeObj, { val: 0, duration: 1.2, onUpdate: () => {
+    gsap.to(fadeObj, { val: 0, duration: 0.8, onUpdate: () => {
       particlesRef.current.forEach((p) => (p.opacity *= 0.94));
     }});
 
-    // Reveal fusion text
     const fusionEl = fusionRef.current;
     if (fusionEl) {
-      gsap.to(fusionEl, { opacity: 1, duration: 0.7, delay: 0.2 });
+      gsap.to(fusionEl, { opacity: 1, duration: 0.5, delay: 0.1 });
       const brandName = fusionEl.querySelector('.brand-name');
       const tagline = fusionEl.querySelector('.tagline');
-      if (brandName) gsap.fromTo(brandName, { scale: 0.7, filter: 'blur(12px)' }, { scale: 1, filter: 'blur(0px)', duration: 0.7, delay: 0.25, ease: 'back.out(1.5)' });
+      if (brandName) gsap.fromTo(brandName, { scale: 0.7, filter: 'blur(12px)' }, { scale: 1, filter: 'blur(0px)', duration: 0.5, delay: 0.15, ease: 'back.out(1.5)' });
       if (tagline) {
         gsap.set(tagline, { opacity: 0, y: 15 });
-        gsap.to(tagline, { opacity: 1, y: 0, duration: 0.6, delay: 0.9 });
+        gsap.to(tagline, { opacity: 1, y: 0, duration: 0.4, delay: 0.5 });
       }
     }
 
-    // Complete after pause
-    setTimeout(() => onComplete(), 1800);
+    setTimeout(() => onComplete(), 1200);
   }, [onComplete, createBurstParticle]);
 
-  // ============ ELECTRIC SPAWNER ============
   const spawnElectricArcs = useCallback(() => {
     const nodes = document.querySelectorAll('.e-node');
     const logoEl = logoRef.current;
@@ -276,13 +255,12 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     }, 60);
   }, [createElectricArc]);
 
-  // ============ SETUP TEXT ============
   const setupText = useCallback(() => {
     const container = textRef.current;
     if (!container) return;
     container.innerHTML = '';
     const text = 'Continuous Improvement';
-    const highlights = [0, 11]; // C and I
+    const highlights = [0, 11];
     for (let i = 0; i < text.length; i++) {
       const span = document.createElement('span');
       span.style.display = 'inline-block';
@@ -307,7 +285,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     }
   }, []);
 
-  // ============ MAIN ANIMATION ============
   useEffect(() => {
     if (!gsapLoaded) return;
     const gsap = gsapRef.current;
@@ -317,23 +294,18 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     const H = window.innerHeight;
     stateRef.current = { particlesActive: false, fusionComplete: false, electricActive: false, W, H };
 
-    // Setup canvas
     const canvas = canvasRef.current;
     const elecCanvas = electricCanvasRef.current;
     if (canvas) { canvas.width = W; canvas.height = H; }
     if (elecCanvas) { elecCanvas.width = 160; elecCanvas.height = 160; }
 
-    // Init ambient particles
     ambientRef.current = [];
     for (let i = 0; i < 50; i++) ambientRef.current.push(createAmbientParticle());
 
-    // Start render
     animFrameRef.current = requestAnimationFrame(render);
 
-    // Setup text
     setupText();
 
-    // Reset states
     particlesRef.current = [];
     explosionRef.current = [];
     electricArcsRef.current = [];
@@ -348,16 +320,16 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     const nodes = document.querySelectorAll('.e-node');
     nodes.forEach((n) => gsap.set(n, { opacity: 0, scale: 0 }));
 
-    // Timeline
-    const tl = gsap.timeline({ delay: 0.3 });
+    // ============ TIMELINE (FAST) ============
+    const tl = gsap.timeline({ delay: 0.2 });
 
     // 1. Logo entrance
-    tl.to(logoEl, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(1.3)' });
+    tl.to(logoEl, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(1.3)' });
 
     // 2. Node pulse wave 1
-    tl.to(nodes, { opacity: 1, scale: 1, duration: 0.12, stagger: { each: 0.04, from: 'random' }, ease: 'power2.out' }, '-=0.2');
-    tl.to('.e-node .ring', { opacity: 1, scale: 1.5, duration: 0.3, stagger: { each: 0.04, from: 'random' }, ease: 'power2.out' }, '-=0.6');
-    tl.to('.e-node .ring', { opacity: 0, scale: 2, duration: 0.4, stagger: { each: 0.04, from: 'random' } }, '-=0.3');
+    tl.to(nodes, { opacity: 1, scale: 1, duration: 0.08, stagger: { each: 0.02, from: 'random' }, ease: 'power2.out' }, '-=0.2');
+    tl.to('.e-node .ring', { opacity: 1, scale: 1.5, duration: 0.2, stagger: { each: 0.02, from: 'random' }, ease: 'power2.out' }, '-=0.4');
+    tl.to('.e-node .ring', { opacity: 0, scale: 2, duration: 0.2, stagger: { each: 0.02, from: 'random' } }, '-=0.2');
 
     // 3. Electric connections
     tl.call(() => {
@@ -366,45 +338,45 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     }, undefined, '-=0.2');
 
     // Node wave 2
-    tl.to(nodes, { opacity: 0.4, scale: 0.8, duration: 0.2, stagger: { each: 0.03, from: 'center' } }, '-=0.1');
-    tl.to(nodes, { opacity: 1, scale: 1.2, duration: 0.15, stagger: { each: 0.03, from: 'edges' } });
-    tl.to('.e-node .ring', { opacity: 0.8, scale: 1.3, duration: 0.2, stagger: { each: 0.03, from: 'edges' } }, '-=0.3');
-    tl.to('.e-node .ring', { opacity: 0, scale: 2.5, duration: 0.3 }, '-=0.1');
+    tl.to(nodes, { opacity: 0.4, scale: 0.8, duration: 0.1, stagger: { each: 0.015, from: 'center' } }, '-=0.1');
+    tl.to(nodes, { opacity: 1, scale: 1.2, duration: 0.1, stagger: { each: 0.015, from: 'edges' } });
+    tl.to('.e-node .ring', { opacity: 0.8, scale: 1.3, duration: 0.1, stagger: { each: 0.015, from: 'edges' } }, '-=0.2');
+    tl.to('.e-node .ring', { opacity: 0, scale: 2.5, duration: 0.2 }, '-=0.1');
 
     // Fade nodes
-    tl.to(nodes, { opacity: 0, scale: 0, duration: 0.4, stagger: { each: 0.02, from: 'random' }, delay: 0.3 });
+    tl.to(nodes, { opacity: 0, scale: 0, duration: 0.3, stagger: { each: 0.01, from: 'random' }, delay: 0.1 });
 
     // Logo float
-    gsap.to(logoEl, { y: -8, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1 });
+    gsap.to(logoEl, { y: -8, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 0.5 });
 
-    // 4. Letters type in
+    // 4. Letters type in (fast)
     const letters = textEl?.querySelectorAll('.letter') || [];
-    tl.to(letters, { opacity: 1, duration: 0.04, stagger: 0.035, ease: 'none' }, '-=0.3');
-    tl.to({}, { duration: 0.4 });
+    tl.to(letters, { opacity: 1, duration: 0.03, stagger: 0.02, ease: 'none' }, '-=0.2');
+    tl.to({}, { duration: 0.2 });
 
     // 5. Highlight C and I
     const highlighted = textEl?.querySelectorAll('.letter.highlight') || [];
     const others = textEl?.querySelectorAll('.letter:not(.highlight)') || [];
-    tl.to(highlighted, { scale: 1.3, duration: 0.3, ease: 'power2.out' });
-    tl.to(others, { opacity: 0, y: -8, duration: 0.5, stagger: 0.015, ease: 'power2.in' }, '-=0.1');
-    tl.to(highlighted, { scale: 1.5, duration: 0.4, ease: 'power2.inOut' }, '-=0.2');
+    tl.to(highlighted, { scale: 1.3, duration: 0.2, ease: 'power2.out' });
+    tl.to(others, { opacity: 0, y: -8, duration: 0.3, stagger: 0.01, ease: 'power2.in' }, '-=0.1');
+    tl.to(highlighted, { scale: 1.5, duration: 0.2, ease: 'power2.inOut' }, '-=0.1');
 
-    // 6. Spawn fusion particles
+    // 6. Spawn fusion particles (fewer, faster)
     tl.call(() => {
       stateRef.current.particlesActive = true;
       let spawned = 0;
-      const total = 130;
+      const total = 80;
       const iv = setInterval(() => {
         const batch = Math.min(10, total - spawned);
         for (let i = 0; i < batch; i++) particlesRef.current.push(createFusionParticle());
         spawned += batch;
         if (spawned >= total) clearInterval(iv);
-      }, 40);
+      }, 20);
     });
 
     // Fade C/I and logo during particle convergence
-    tl.to(highlighted, { opacity: 0, scale: 2.5, duration: 0.8, delay: 0.5, ease: 'power2.in' });
-    tl.to(logoEl, { opacity: 0, scale: 0.5, duration: 0.8, ease: 'power2.in' }, '<');
+    tl.to(highlighted, { opacity: 0, scale: 2.5, duration: 0.6, delay: 0.3, ease: 'power2.in' });
+    tl.to(logoEl, { opacity: 0, scale: 0.5, duration: 0.5, ease: 'power2.in' }, '<');
 
     return () => {
       cancelAnimationFrame(animFrameRef.current);
@@ -412,21 +384,16 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     };
   }, [gsapLoaded, render, setupText, spawnElectricArcs, createFusionParticle, createAmbientParticle, onComplete]);
 
-  // Node positions for the hexagonal mesh
   const nodePositions = [
-    // Outer hex
     { top: '1%', left: '48%' }, { top: '14%', left: '80%' }, { top: '14%', left: '16%' },
     { top: '50%', left: '96%' }, { top: '50%', left: '4%' }, { top: '86%', left: '80%' },
     { top: '86%', left: '16%' }, { top: '99%', left: '48%' },
-    // Mid ring
     { top: '8%', left: '64%' }, { top: '8%', left: '32%' }, { top: '32%', left: '88%' },
     { top: '32%', left: '10%' }, { top: '68%', left: '88%' }, { top: '68%', left: '10%' },
     { top: '92%', left: '64%' }, { top: '92%', left: '32%' },
-    // Inner hex
     { top: '26%', left: '48%' }, { top: '36%', left: '68%' }, { top: '36%', left: '28%' },
     { top: '50%', left: '76%' }, { top: '50%', left: '22%' }, { top: '64%', left: '68%' },
     { top: '64%', left: '28%' }, { top: '74%', left: '48%' },
-    // Center cluster
     { top: '50%', left: '50%' }, { top: '42%', left: '40%' }, { top: '42%', left: '58%' },
     { top: '58%', left: '40%' }, { top: '58%', left: '58%' },
   ];
@@ -439,7 +406,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     >
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-[2] pointer-events-none" />
 
-      {/* Logo with electric nodes */}
       <div ref={logoRef} className="relative z-[3] w-[160px] h-[160px] mb-10" style={{ opacity: 0 }}>
         <img
           src="/logo.png"
@@ -447,7 +413,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
           className="w-full h-full object-contain"
           style={{ filter: 'drop-shadow(0 0 40px rgba(139,92,246,0.5))' }}
         />
-        {/* Electric nodes */}
         <div className="absolute inset-0 pointer-events-none">
           {nodePositions.map((pos, i) => (
             <div
@@ -469,7 +434,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
         />
       </div>
 
-      {/* "Continuous Improvement" text */}
       <div className="relative z-[3] text-center h-[70px] flex items-center justify-center">
         <div
           ref={textRef}
@@ -484,7 +448,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
         />
       </div>
 
-      {/* Fusion brand reveal */}
       <div
         ref={fusionRef}
         className="absolute z-[5] top-1/2 left-1/2 text-center"
@@ -525,7 +488,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
         </div>
       </div>
 
-      {/* Shimmer keyframe */}
       <style>{`
         @keyframes shimmer {
           0%, 100% { background-position: 0% 50%; }
