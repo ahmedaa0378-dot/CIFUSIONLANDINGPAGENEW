@@ -14,7 +14,6 @@ const footerLinks = {
     { name: 'Blog', path: '#' },
   ],
   Resources: [
-    { name: 'Documentation', path: '/docs' },
     { name: 'Help Center', path: '#' },
     { name: 'Case Studies', path: '#' },
     { name: 'Webinars', path: '#' },
