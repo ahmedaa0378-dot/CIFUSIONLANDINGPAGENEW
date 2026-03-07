@@ -244,7 +244,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     }
 
     // Complete after pause
-    setTimeout(() => onComplete(), 3200);
+    setTimeout(() => onComplete(), 1800);
   }, [onComplete, createBurstParticle]);
 
   // ============ ELECTRIC SPAWNER ============
@@ -349,10 +349,10 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     nodes.forEach((n) => gsap.set(n, { opacity: 0, scale: 0 }));
 
     // Timeline
-    const tl = gsap.timeline({ delay: 0.6 });
+    const tl = gsap.timeline({ delay: 0.3 });
 
     // 1. Logo entrance
-    tl.to(logoEl, { opacity: 1, scale: 1, rotation: 0, duration: 1.0, ease: 'back.out(1.3)' });
+    tl.to(logoEl, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(1.3)' });
 
     // 2. Node pulse wave 1
     tl.to(nodes, { opacity: 1, scale: 1, duration: 0.12, stagger: { each: 0.04, from: 'random' }, ease: 'power2.out' }, '-=0.2');
@@ -380,7 +380,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     // 4. Letters type in
     const letters = textEl?.querySelectorAll('.letter') || [];
     tl.to(letters, { opacity: 1, duration: 0.04, stagger: 0.035, ease: 'none' }, '-=0.3');
-    tl.to({}, { duration: 1.0 });
+    tl.to({}, { duration: 0.4 });
 
     // 5. Highlight C and I
     const highlighted = textEl?.querySelectorAll('.letter.highlight') || [];
@@ -403,7 +403,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     });
 
     // Fade C/I and logo during particle convergence
-    tl.to(highlighted, { opacity: 0, scale: 2.5, duration: 1.2, delay: 1.2, ease: 'power2.in' });
+    tl.to(highlighted, { opacity: 0, scale: 2.5, duration: 0.8, delay: 0.5, ease: 'power2.in' });
     tl.to(logoEl, { opacity: 0, scale: 0.5, duration: 0.8, ease: 'power2.in' }, '<');
 
     return () => {
