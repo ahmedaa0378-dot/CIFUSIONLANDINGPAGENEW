@@ -53,7 +53,6 @@ function AppContent() {
             <Route path="/demo" element={<Demo />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/docs" element={<DocsHub />} />
           </Routes>
         </main>
         <Footer />
