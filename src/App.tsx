@@ -11,7 +11,6 @@ import About from './pages/About';
 import Demo from './pages/Demo';
 import Contact from './pages/Contact';
 import { useState, useEffect } from 'react';
-import DocsHub from './pages/DocsHub';
 import ScrollToTop from './components/ScrollToTop';
 
 
