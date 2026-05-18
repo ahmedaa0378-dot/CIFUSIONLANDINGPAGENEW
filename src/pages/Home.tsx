@@ -262,21 +262,12 @@ export default function Home() {
           className="w-full h-auto block"
           loading="eager"
         />
-        </div>
+    </div>
+          </div>
       </div>
     </div>
   </div>
-  <style>{`
-    @keyframes float-slow {
-      0%, 100% { transform: translateY(0px); }
-      50%      { transform: translateY(-10px); }
-    }
-    .animate-float-slow {
-      animation: float-slow 6s ease-in-out infinite;
-    }
-  `}</style>
 </section>
-
       {/* ===== TRUST BAR ===== */}
       <section className="section-padding py-10 border-y border-gray-200/50 dark:border-purple-500/8 bg-gray-50/50 dark:bg-gray-950/50">
         <div className="max-w-7xl mx-auto text-center">
