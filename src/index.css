@@ -80,4 +80,11 @@
       linear-gradient(90deg, rgba(139, 92, 246, 0.035) 1px, transparent 1px);
     background-size: 60px 60px;
   }
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
 }
