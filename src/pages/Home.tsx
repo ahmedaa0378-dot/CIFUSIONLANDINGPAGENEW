@@ -234,19 +234,48 @@ export default function Home() {
               </div>
             </div>
           </div>
-{/* Hero Image */}
+{/* Hero Image with glow */}
 <div className="flex-1 max-w-lg w-full">
-  <div className="card-glass p-3 overflow-hidden">
-    <img
-      src="/hero-ai-recommender.png"
-      alt="CIFusion AI recommending Lean Six Sigma methodology for a frontline idea"
-      className="w-full h-auto rounded-xl"
-      loading="eager"
+  <div className="relative group animate-float-slow">
+    {/* Glowing aura behind */}
+    <div
+      className="absolute -inset-6 rounded-[2rem] opacity-50 blur-3xl transition-all duration-700 group-hover:opacity-70"
+      style={{
+        background:
+          'linear-gradient(135deg, rgba(124,58,237,0.45), rgba(236,72,153,0.35), rgba(249,115,22,0.45))',
+      }}
     />
-  </div>
-</div>
+    {/* Secondary inner glow */}
+    <div
+      className="absolute -inset-1 rounded-2xl opacity-60 blur-md"
+      style={{
+        background:
+          'linear-gradient(135deg, rgba(124,58,237,0.6), rgba(249,115,22,0.6))',
+      }}
+    />
+    {/* Gradient border + image */}
+    <div className="relative rounded-2xl p-[1.5px] gradient-bg shadow-2xl shadow-purple-500/30">
+      <div className="rounded-2xl overflow-hidden bg-white dark:bg-gray-950">
+        <img
+          src="/hero-ai-recommender.png"
+          alt="CIFusion AI recommending Lean Six Sigma methodology for a frontline idea"
+          className="w-full h-auto block"
+          loading="eager"
+        />
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+  <style>{`
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-10px); }
+    }
+    .animate-float-slow {
+      animation: float-slow 6s ease-in-out infinite;
+    }
+  `}</style>
+</section>
 
       {/* ===== TRUST BAR ===== */}
       <section className="section-padding py-10 border-y border-gray-200/50 dark:border-purple-500/8 bg-gray-50/50 dark:bg-gray-950/50">
