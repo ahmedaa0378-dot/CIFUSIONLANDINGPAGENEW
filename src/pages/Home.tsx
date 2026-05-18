@@ -187,13 +187,6 @@ const industries = [
   { icon: Building2, name: 'Energy' },
 ];
 
-const bars = [
-  { name: 'DMAIC', w: 78 },
-  { name: 'Kaizen', w: 62 },
-  { name: '5 Whys', w: 45 },
-  { name: 'FMEA', w: 34 },
-  { name: 'A3', w: 28 },
-];
 
 /* ============================================================
    COMPONENT
@@ -241,36 +234,17 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Dashboard Card */}
-          <div className="flex-1 max-w-lg w-full">
-            <div className="card-glass p-7">
-              <div className="flex items-center gap-2 mb-5">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400" /><div className="w-2.5 h-2.5 rounded-full bg-yellow-400" /><div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                <span className="ml-2 text-[11px] font-mono text-gray-400 dark:text-gray-600">improvement_dashboard.app</span>
-              </div>
-              <div className="flex items-baseline gap-3 mb-1">
-                <span className="font-heading text-4xl font-extrabold gradient-text">847</span>
-                <span className="text-sm text-gray-400 dark:text-gray-500">ideas this quarter</span>
-              </div>
-              <p className="text-xs text-gray-400 dark:text-gray-600 mb-5">AI methodology distribution</p>
-              {bars.map((bar) => (
-                <div key={bar.name} className="flex items-center gap-3 mb-2.5">
-                  <span className="w-16 text-[11px] font-mono text-gray-400 dark:text-gray-600">{bar.name}</span>
-                  <div className="flex-1 h-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/15 overflow-hidden">
-                    <div className="h-full rounded-full gradient-bg" style={{ width: `${bar.w}%` }} />
-                  </div>
-                </div>
-              ))}
-              <div className="flex gap-5 mt-5 pt-5 border-t border-gray-200/40 dark:border-purple-500/10">
-                {[{ v: '$2.4M', l: 'SAVINGS' }, { v: '94%', l: 'ADOPTION' }, { v: '12x', l: 'ROI' }].map((s) => (
-                  <div key={s.l} className="flex-1 text-center">
-                    <div className="font-heading text-lg font-extrabold text-gray-900 dark:text-white">{s.v}</div>
-                    <div className="text-[10px] font-mono text-gray-400 dark:text-gray-600 tracking-wider mt-0.5">{s.l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+{/* Hero Image */}
+<div className="flex-1 max-w-lg w-full">
+  <div className="card-glass p-3 overflow-hidden">
+    <img
+      src="/hero-ai-recommender.png"
+      alt="CIFusion AI recommending Lean Six Sigma methodology for a frontline idea"
+      className="w-full h-auto rounded-xl"
+      loading="eager"
+    />
+  </div>
+</div>
         </div>
       </section>
 
