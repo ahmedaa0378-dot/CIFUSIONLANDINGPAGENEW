@@ -9,11 +9,12 @@ const values = [
 ];
 
 const milestones = [
-  { year: '2024', event: 'Founded Allegiant InfoTech with a mission to democratize CI' },
-  { year: '2024', event: 'Built CIFusion MVP — AI-powered idea analysis engine goes live' },
-  { year: '2025', event: 'Enterprise launch with Azure SSO, multi-tenant, and replication' },
-  { year: '2025', event: 'Expansion into healthcare, pharma, and aerospace verticals' },
-  { year: '2026', event: 'AI coaching engine and interactive LSS templates launch' },
+  { year: '2024', event: 'Founded Allegiant InfoTech with a mission to democratize continuous improvement' },
+  { year: '2024', event: 'Built the CIFusion MVP — AI-powered idea analysis engine goes live' },
+  { year: '2025', event: 'Enterprise foundation ships — Azure SSO, multi-tenant architecture, and data replication' },
+  { year: '2025', event: 'Platform built and validated for manufacturing, healthcare, pharma, and aerospace use cases' },
+  { year: '2026', event: 'First enterprise customer goes live in production' },
+  { year: '2026', event: 'AI coaching engine and interactive Lean Six Sigma templates launch' },
 ];
 
 export default function About() {
