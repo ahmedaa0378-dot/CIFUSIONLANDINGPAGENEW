@@ -1,0 +1,12 @@
+{
+  "name": "CIFusion.ai",
+  "short_name": "CIFusion",
+  "description": "AI-powered Lean Six Sigma and continuous improvement platform for mid-market operations teams.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7C3AED",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "367x367", "type": "image/png" }
+  ]
+}
