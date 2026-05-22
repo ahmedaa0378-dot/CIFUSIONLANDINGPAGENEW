@@ -238,17 +238,17 @@ export default function Demo() {
               <div className="grid md:grid-cols-2 gap-5 mb-5">
                 <div>
                   <label className="block text-xs font-semibold mb-1.5 text-gray-500 dark:text-gray-400">First Name *</label>
-                  <input required type="text" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} className={inputClass} placeholder="Ahmed" />
+                  <input required type="text" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} className={inputClass} placeholder="John" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold mb-1.5 text-gray-500 dark:text-gray-400">Last Name *</label>
-                  <input required type="text" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} className={inputClass} placeholder="Khan" />
+                  <input required type="text" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} className={inputClass} placeholder="Smith" />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-5 mb-5">
                 <div>
                   <label className="block text-xs font-semibold mb-1.5 text-gray-500 dark:text-gray-400">Work Email *</label>
-                  <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} placeholder="ahmed@company.com" />
+                  <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} placeholder="john@company.com" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold mb-1.5 text-gray-500 dark:text-gray-400">Phone</label>
