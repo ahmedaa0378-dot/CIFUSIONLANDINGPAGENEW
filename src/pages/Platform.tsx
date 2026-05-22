@@ -6,31 +6,37 @@ const capabilities = [
     icon: Lightbulb, title: 'Guided Idea Submission',
     desc: 'A step-by-step wizard that helps any employee articulate their improvement idea — no training required. The AI asks smart follow-up questions to capture full context.',
     details: ['Category & area selection', 'Problem description wizard', 'Impact estimation helper', 'Photo & document attachments'],
+    img: '/platform-idea-submission.png',
   },
   {
     icon: Brain, title: 'AI Analysis Engine',
     desc: 'GPT-4 analyzes every submission and recommends the optimal Lean Six Sigma methodology. It considers problem type, scope, data availability, and organizational context.',
     details: ['DMAIC, Kaizen, 5 Whys, FMEA, A3', 'Confidence scoring', 'Methodology justification', 'Alternative recommendations'],
+    img: '/platform-ai-analysis.png',
   },
   {
     icon: GitBranch, title: 'Smart Approval Workflow',
     desc: 'Configurable two-level (or N-level) approval flow. Managers and CSI Heads see AI recommendations alongside the original submission.',
     details: ['Role-based routing', 'Bulk approval actions', 'Comments & feedback loop', 'Escalation rules'],
+    img: '/platform-approval-workflow.png',
   },
   {
     icon: Target, title: 'Project Execution',
     desc: 'Approved ideas become tracked projects on Kanban boards with automatic progress calculation, milestone tracking, and team assignment.',
     details: ['Kanban boards with drag & drop', 'Milestone & phase tracking', 'Team member assignment', 'Auto progress calculation'],
+    img: '/platform-project-kanban.png',
   },
   {
     icon: BarChart3, title: 'ROI & Impact Tracking',
     desc: 'Measure documented savings, track cost avoidance, and validate ROI across every improvement project with real-time analytics.',
     details: ['Financial impact tracking', 'Before/after metrics', 'Savings validation workflow', 'Executive dashboards'],
+    img: '/platform-roi-tracking.png',
   },
   {
     icon: Repeat, title: 'Multi-Site Replication',
     desc: 'When an improvement proves successful, replicate it across facilities with one click. Track adoption and impact at every site.',
     details: ['One-click replication', 'Site-specific adaptation', 'Replication success tracking', 'Cross-site benchmarking'],
+    img: '/platform-replication.png',
   },
 ];
 
@@ -108,8 +114,23 @@ export default function Platform() {
                     ))}
                   </ul>
                 </div>
-                <div className={`rounded-xl bg-gradient-to-br from-purple-500/5 to-orange-500/5 dark:from-purple-500/10 dark:to-orange-500/5 h-48 md:h-64 flex items-center justify-center ${i % 2 === 1 ? 'md:order-1' : ''}`}>
-                  <cap.icon className="w-16 h-16 text-purple-500/15" />
+                <div className={`relative rounded-xl bg-gradient-to-br from-purple-500/5 to-orange-500/5 dark:from-purple-500/10 dark:to-orange-500/5 h-48 md:h-64 overflow-hidden ${i % 2 === 1 ? 'md:order-1' : ''}`}>
+                  {/* Fallback icon (shown if image missing) */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <cap.icon className="w-16 h-16 text-purple-500/15" />
+                  </div>
+                  {/* Screenshot in a light browser-style frame */}
+                  <div className="absolute inset-0 p-3 md:p-4">
+                    <div className="w-full h-full rounded-lg overflow-hidden border border-gray-200/70 dark:border-gray-700/60 shadow-lg bg-white dark:bg-gray-900">
+                      <img
+                        src={cap.img}
+                        alt={`${cap.title} screen in CIFusion`}
+                        className="w-full h-full object-cover object-top"
+                        loading="lazy"
+                        onError={(e) => { (e.currentTarget.closest('.absolute.inset-0.p-3') as HTMLElement)?.style.setProperty('display', 'none'); }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
