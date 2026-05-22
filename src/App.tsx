@@ -16,6 +16,7 @@ import Privacy from './pages/Privacy';
 import Cookies from './pages/Cookies';
 import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
+import RouteSeo from './components/RouteSeo';
 import ScrollToTop from './components/ScrollToTop';
 
 
@@ -41,6 +42,9 @@ function AppContent() {
 
   return (
     <>
+      {showIntro && <CinematicIntro onComplete={handleIntroComplete} />}
+      <>
+      <RouteSeo />
       {showIntro && <CinematicIntro onComplete={handleIntroComplete} />}
       <div
         className="min-h-screen flex flex-col transition-opacity duration-700"
