@@ -84,9 +84,9 @@ export default function Contact() {
     setError('');
 
     try {
-      // 1. Send notification to hello@cifusion.ai
+      // 1. Send notification to sales@cifusion.ai
       await sendEmail({
-        to: 'hello@cifusion.ai',
+        to: 'sales@cifusion.ai',
         subject: `[Contact] ${form.subject} — from ${form.name}`,
         html: buildContactEmailHTML(form),
         from_alias: 'noreply',
@@ -102,7 +102,7 @@ export default function Contact() {
 
       setSubmitted(true);
     } catch (err) {
-      setError('Something went wrong. Please try again or email us directly at hello@cifusion.ai');
+      setError('Something went wrong. Please try again or email us directly at sales@cifusion.ai');
     } finally {
       setSending(false);
     }
@@ -143,8 +143,8 @@ export default function Contact() {
             </p>
             <div className="space-y-5">
               {[
-                { icon: Mail, label: 'Email', value: 'hello@cifusion.ai' },
-                { icon: Phone, label: 'Phone', value: '+1 (650) 450-8149' },
+                { icon: Mail, label: 'Email', value: 'sales@cifusion.ai' },
+                { icon: Phone, label: 'Phone', value: '+1 (630) 237-8000' },
                 { icon: MapPin, label: 'Office', value: 'Allegiant InfoTech, Global Operations' },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4">
