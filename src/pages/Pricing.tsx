@@ -114,10 +114,10 @@ export default function Pricing() {
         <div className="relative z-10 max-w-3xl mx-auto">
           <p className="text-xs font-mono font-medium text-purple-600 dark:text-purple-400 tracking-widest uppercase mb-3">Pricing</p>
           <h1 className="font-heading text-4xl md:text-5xl font-extrabold tracking-tight mb-5 text-gray-900 dark:text-white">
-            Simple, <span className="gradient-text">Transparent Pricing</span>
+            Pricing That <span className="gradient-text">Fits Your Organization</span>
           </h1>
           <p className="text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-            No hidden fees. Unlimited employee accounts at every tier. Scale your CI program without scaling your costs.
+            Every plan includes unlimited employee accounts. Tell us about your team and we'll tailor a plan to your size, goals, and CI maturity.
           </p>
         </div>
       </section>
