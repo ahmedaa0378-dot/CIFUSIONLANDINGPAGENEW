@@ -4,17 +4,8 @@ import { ArrowRight, Target, Lightbulb, Shield, Brain, Zap } from 'lucide-react'
 const values = [
   { icon: Target, title: 'Impact-Driven', desc: 'Every feature we build must drive measurable business outcomes. If it doesn\'t improve the improvement process, it doesn\'t ship.' },
   { icon: Lightbulb, title: 'Frontline First', desc: 'We design for the people closest to the problem. If a shop floor operator can\'t use it intuitively, we haven\'t done our job.' },
-  { icon: Shield, title: 'Enterprise Trust', desc: 'Data isolation, SOC 2 compliance, and zero-compromise security. Our customers trust us with their competitive advantage.' },
+  { icon: Shield, title: 'Enterprise Trust', desc: 'Data isolation, a SOC 2 Type II audit in progress, and zero-compromise security. Our customers trust us with their competitive advantage.' },
   { icon: Brain, title: 'AI With Purpose', desc: 'AI isn\'t a gimmick — it\'s the core engine. We use it to democratize Lean Six Sigma expertise that was previously locked behind expensive consultants.' },
-];
-
-const team = [
-  { name: 'Ahmed Khan', role: 'Founder & CEO', expertise: 'AI Strategy • Enterprise Architecture', bio: 'Visionary behind CIFusion\'s AI-first approach to continuous improvement. Deep expertise in enterprise software and manufacturing operations.', gradient: 'from-purple-500 to-indigo-500' },
-  { name: 'Dr. Sarah Mitchell', role: 'Head of Lean Six Sigma', expertise: 'Master Black Belt • DMAIC • DFSS', bio: '20+ years leading CI transformation programs across Fortune 500 manufacturing and healthcare organizations.', gradient: 'from-pink-500 to-purple-500' },
-  { name: 'Raj Patel', role: 'VP of Engineering', expertise: 'Full Stack • Cloud Architecture • DevOps', bio: 'Architected the multi-tenant platform from the ground up. Previously built scalable SaaS platforms serving 10M+ users.', gradient: 'from-orange-500 to-pink-500' },
-  { name: 'Maria Gonzalez', role: 'AI/ML Lead', expertise: 'NLP • LLMs • Recommendation Systems', bio: 'Designed CIFusion\'s intelligent analysis engine. Former AI researcher with published work in industrial process optimization.', gradient: 'from-blue-500 to-purple-500' },
-  { name: 'James O\'Brien', role: 'Head of Customer Success', expertise: 'Black Belt • Change Management • Training', bio: 'Ensures every customer achieves measurable ROI. Led CI programs at 3 automotive OEMs before joining CIFusion.', gradient: 'from-indigo-500 to-blue-500' },
-  { name: 'Priya Sharma', role: 'Product Manager', expertise: 'SaaS Product • UX Research • CI Workflows', bio: 'Bridges the gap between frontline users and technology. Obsessed with making complex CI processes feel effortless.', gradient: 'from-purple-500 to-orange-500' },
 ];
 
 const milestones = [
@@ -97,34 +88,62 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Expertise */}
       <section className="section-padding py-24 bg-gray-50/50 dark:bg-gray-950/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="text-xs font-mono font-medium text-purple-600 dark:text-purple-400 tracking-widest uppercase mb-3">The Team</p>
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-xs font-mono font-medium text-purple-600 dark:text-purple-400 tracking-widest uppercase mb-3">Our Expertise</p>
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-gray-900 dark:text-white">
-              Black Belts, AI Engineers & <span className="gradient-text">Industry Veterans</span>
+              Built by a Practitioner, <span className="gradient-text">Not a Vendor</span>
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-              Our team combines decades of Lean Six Sigma expertise with cutting-edge AI engineering.
+          </div>
+          <div className="space-y-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p>
+              CIFusion wasn't built by a software company that discovered Lean Six Sigma along the way.
+              It was built by a practitioner who has spent more than 18 years inside it — leading
+              continuous improvement and quality programs where the results had to be real, measurable,
+              and defensible.
+            </p>
+            <p>
+              Our founder is a certified <strong>Lean Six Sigma Master Black Belt</strong> with deep,
+              hands-on experience across manufacturing, automotive, pharmaceutical, healthcare, and
+              aerospace operations. That means real fluency with the full improvement toolkit — DMAIC,
+              Design for Six Sigma, Kaizen, value stream mapping, FMEA, and structured root-cause
+              analysis — applied to problems on actual shop floors and in real operations, not just in
+              theory.
+            </p>
+            <p>
+              Across those years, the same gap kept showing up: the methodology works, but access to it
+              doesn't scale. Structured improvement stayed locked behind six-figure consulting
+              engagements and a short supply of certified experts, leaving most mid-market organizations
+              on the outside. CIFusion exists to close that gap — encoding hard-won CI expertise into AI
+              so a frontline operator can get the same caliber of guidance a Black Belt would give.
+            </p>
+            <p>
+              Operated under <strong>Allegiant InfoTech</strong>, CIFusion pairs that deep continuous
+              improvement domain knowledge with modern software engineering — a combination of people
+              who have actually run improvement programs and people who can build the technology to
+              scale them.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {team.map((member) => (
-              <div key={member.name} className="card-glass p-6 group hover:border-purple-500/20 transition-all">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${member.gradient} flex items-center justify-center text-white font-heading font-bold text-sm`}>
-                    {member.name.split(' ').map((n) => n[0]).join('')}
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-base font-bold text-gray-900 dark:text-white">{member.name}</h3>
-                    <p className="text-xs text-purple-600 dark:text-purple-400 font-medium">{member.role}</p>
-                  </div>
-                </div>
-                <p className="text-[11px] font-mono text-gray-400 dark:text-gray-600 mb-3 tracking-wide">{member.expertise}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-500 leading-relaxed">{member.bio}</p>
-              </div>
-            ))}
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+            <div className="card-glass p-5 text-center">
+              <p className="font-heading text-lg font-extrabold gradient-text mb-1">Master Black Belt</p>
+              <p className="text-xs text-gray-500 dark:text-gray-500">Lean Six Sigma certified</p>
+            </div>
+            <div className="card-glass p-5 text-center">
+              <p className="font-heading text-2xl font-extrabold gradient-text mb-1">18+ Years</p>
+              <p className="text-xs text-gray-500 dark:text-gray-500">in CI, quality &amp; product engineering</p>
+            </div>
+            <div className="card-glass p-5 text-center">
+              <p className="font-heading text-2xl font-extrabold gradient-text mb-1">5+ Industries</p>
+              <p className="text-xs text-gray-500 dark:text-gray-500">manufacturing to aerospace</p>
+            </div>
+            <div className="card-glass p-5 text-center">
+              <p className="font-heading text-lg font-extrabold gradient-text mb-1">Full LSS Toolkit</p>
+              <p className="text-xs text-gray-500 dark:text-gray-500">DMAIC, Kaizen, FMEA &amp; more</p>
+            </div>
           </div>
         </div>
       </section>
@@ -160,11 +179,11 @@ export default function About() {
       {/* CTA */}
       <section className="section-padding py-20 bg-gray-50/50 dark:bg-gray-950/30 text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mb-4 text-gray-900 dark:text-white">
-            Join the <span className="gradient-text">CIFusion Team</span>
+         <h2 className="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mb-4 text-gray-900 dark:text-white">
+            See What <span className="gradient-text">CIFusion</span> Can Do
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-6">
-            We're hiring Black Belts, AI engineers, and product builders who want to transform how the world improves.
+            Bring structured, AI-powered continuous improvement to your organization. Let's talk about what it could look like for your team.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/contact" className="btn-primary inline-flex items-center gap-2">Get in Touch <ArrowRight className="w-4 h-4" /></Link>
