@@ -75,10 +75,10 @@ function AnimatedSection({ children, className = '', delay = 0 }: { children: Re
    DATA
    ============================================================ */
 const stats = [
-  { value: '73%', label: 'Reduction in manual ticket volume', color: 'text-purple-500' },
-  { value: '12x', label: 'Average ROI for pilot customers', color: 'text-orange-500' },
-  { value: '94%', label: 'User adoption rate in 90 days', color: 'text-pink-500' },
-  { value: '$2.4M', label: 'Average documented savings per year', color: 'text-emerald-500' },
+  { value: '10', label: 'Lean Six Sigma templates, AI-generated', color: 'text-purple-500' },
+  { value: '5', label: 'Role-based workflows, Employee to Admin', color: 'text-orange-500' },
+  { value: '6', label: 'Industries the platform is built for', color: 'text-pink-500' },
+  { value: 'GPT-4', label: 'Powering every methodology recommendation', color: 'text-emerald-500' },
 ];
 
 const problemStats = [
