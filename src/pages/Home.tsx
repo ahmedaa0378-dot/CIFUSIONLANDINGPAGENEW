@@ -115,7 +115,7 @@ const caseStudies = [
     ],
     story: "A pharmaceutical manufacturer was running 5S projects for problems that needed DMAIC, and Kaizen events for issues requiring FMEA. After deploying CIFusion's AI recommendation engine, every idea submission receives an instant GPT-4 analysis. Within 6 months, the plant achieved 92% accuracy in methodology matching and documented $340K in savings.",
     quote: '"We used to spend two weeks debating which methodology to use. Now the AI recommends in seconds, and it\'s right 9 out of 10 times."',
-    author: '— CI Director, Global Pharmaceuticals',
+    author: '— Pharmaceutical Manufacturing',
     img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=220&fit=crop&q=80',
   },
   {
@@ -128,7 +128,7 @@ const caseStudies = [
     ],
     story: "An automotive parts supplier had years of quality data sitting in spreadsheets. With CIFusion's data analysis engine, the quality team uploaded their CSV datasets and the AI identified 47 hidden patterns including a correlation between shift changeover timing and defect spikes. Within one year, they documented $520K in savings.",
     quote: '"We were sitting on a goldmine of data and didn\'t know it. CIFusion\'s analysis engine found patterns our quality team had been looking for years."',
-    author: '— VP Quality, Automotive Parts Supplier',
+    author: '— Automotive Parts Manufacturing',
     img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=220&fit=crop&q=80',
   },
   {
@@ -141,7 +141,7 @@ const caseStudies = [
     ],
     story: "A healthcare system with 1,000+ employees had a suggestion box program that averaged 3-week response times. CIFusion's two-level approval workflow transformed the process. Idea submissions increased 4.2x in the first quarter. Average approval time dropped to 72 hours. Employee satisfaction jumped from 41% to 94%.",
     quote: '"Our nurses and techs finally feel heard. When they submit an idea, they get a response in days, not weeks."',
-    author: '— COO, Regional Healthcare System',
+    author: '— Healthcare Operations',
     img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=220&fit=crop&q=80',
   },
   {
@@ -154,7 +154,7 @@ const caseStudies = [
     ],
     story: "A mid-size manufacturer running 14 simultaneous CI projects had no visibility into progress or actual savings. CIFusion's project tracking gave every project a Kanban board, milestones, and savings tracker. Within 12 months, the company tracked $950K in validated savings with an 89% project completion rate.",
     quote: '"For the first time, I can walk into a board meeting and show exactly how much our CI program has saved — with validated numbers, not estimates."',
-    author: '— VP Operations, Global Manufacturing',
+    author: '— Discrete Manufacturing',
     img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=220&fit=crop&q=80',
   },
   {
@@ -167,7 +167,7 @@ const caseStudies = [
     ],
     story: "An energy company with facilities across 5 states found proven improvements at one site were never shared with others. CIFusion's replication module flagged validated projects automatically. A single torque calibration improvement was replicated across all 5 facilities in just 8 weeks — delivering $1.8M in total impact from a $12K investment.",
     quote: '"We used to reinvent the wheel at every plant. Now when something works, it spreads across the company in weeks, not years."',
-    author: '— SVP Operations, National Energy Company',
+    author: '— Energy & Utilities',
     img: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600&h=220&fit=crop&q=80',
   },
 ];
@@ -379,10 +379,11 @@ export default function Home() {
       {/* ===== CASE STUDIES ===== */}
       <section className="section-padding py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A1628 0%, #15103a 40%, #0d1f35 70%, #0A1628 100%)' }}>
         <div className="max-w-7xl mx-auto relative z-10">
-          <AnimatedSection>
-            <span className="inline-block px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-[2px] uppercase bg-emerald-500/12 text-emerald-400 mb-4">Case Studies</span>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-white">Real Results Across <span className="gradient-text">Every Capability</span></h2>
-            <p className="text-white/50 max-w-lg mb-10">See how CIFusion's AI-powered features deliver measurable impact across industries.</p>
+        <AnimatedSection>
+            <span className="inline-block px-4 py-1.5 rounded-full text-[11px] font-extrabold tracking-[2px] uppercase bg-emerald-500/12 text-emerald-400 mb-4">Use Cases</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-white">What CIFusion Makes Possible Across <span className="gradient-text">Every Capability</span></h2>
+            <p className="text-white/50 max-w-lg mb-3">See how CIFusion's AI-powered features can deliver measurable impact across industries.</p>
+            <p className="text-xs italic text-white/35 max-w-lg mb-10">Representative scenarios illustrating CIFusion's capabilities. Figures are illustrative.</p>
           </AnimatedSection>
           <div className="flex gap-2 mb-8 flex-wrap">
             {caseStudies.map((cs, i) => (
