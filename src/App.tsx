@@ -42,8 +42,6 @@ function AppContent() {
 
   return (
     <>
-      {showIntro && <CinematicIntro onComplete={handleIntroComplete} />}
-      <>
       <RouteSeo />
       {showIntro && <CinematicIntro onComplete={handleIntroComplete} />}
       <div
