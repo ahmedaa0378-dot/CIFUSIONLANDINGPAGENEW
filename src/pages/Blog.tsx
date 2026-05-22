@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 // ============================================
 // CIFusion.ai Blog — Landing Site
@@ -414,7 +414,9 @@ const CATEGORY_STYLES = {
 // ============================================
 // Blog Hub Page
 // ============================================
-function BlogHub({ onReadArticle }) {
+function BlogHub() {
+  const navigate = useNavigate();
+  const onReadArticle = (id) => navigate(`/blog/${id}`);
   const featured = ARTICLES.filter(a => a.featured);
   const rest = ARTICLES.filter(a => !a.featured);
 
@@ -524,11 +526,25 @@ function BlogHub({ onReadArticle }) {
 // ============================================
 // Article Detail Page
 // ============================================
-function ArticlePage({ article, onBack }) {
+function ArticlePage({ article }) {
+  const navigate = useNavigate();
+
+  // Per-article SEO
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = `${article.title} — CIFusion.ai`;
+    let desc = document.querySelector('meta[name="description"]');
+    const prevDesc = desc?.getAttribute('content') ?? '';
+    if (desc) desc.setAttribute('content', article.excerpt);
+    return () => {
+      document.title = prevTitle;
+      if (desc) desc.setAttribute('content', prevDesc);
+    };
+  }, [article]);
   return (
     <div className="max-w-3xl mx-auto">
       {/* Back */}
-      <button onClick={onBack} className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 mb-8 font-medium">
+      <button onClick={() => navigate('/blog')} className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 mb-8 font-medium">
         ← Back to Blog
       </button>
 
@@ -600,10 +616,10 @@ function ArticlePage({ article, onBack }) {
         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-5">More Articles</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {ARTICLES.filter(a => a.id !== article.id).slice(0, 2).map(a => (
-            <div
+            <Link
+              to={`/blog/${a.id}`}
               key={a.id}
-              onClick={() => { onBack(); setTimeout(() => document.querySelector(`[data-article="${a.id}"]`)?.scrollIntoView(), 100); }}
-              className="group rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-4 hover:border-purple-300 dark:hover:border-purple-500/30 transition-all cursor-pointer"
+              className="group block rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 p-4 hover:border-purple-300 dark:hover:border-purple-500/30 transition-all cursor-pointer"
             >
               <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold mb-2 ${CATEGORY_STYLES[a.categoryColor]}`}>
                 {a.category}
@@ -611,7 +627,7 @@ function ArticlePage({ article, onBack }) {
               <h4 className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors leading-snug">
                 {a.title}
               </h4>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -623,29 +639,28 @@ function ArticlePage({ article, onBack }) {
 // Main Blog Component
 // ============================================
 export default function Blog() {
-  const [activeArticle, setActiveArticle] = useState(null);
-
-  const article = activeArticle ? ARTICLES.find(a => a.id === activeArticle) : null;
-
-  const handleRead = (id) => {
-    setActiveArticle(id);
-    window.scrollTo(0, 0);
-  };
-
-  const handleBack = () => {
-    setActiveArticle(null);
-    window.scrollTo(0, 0);
-  };
+  const { slug } = useParams();
+  const article = slug ? ARTICLES.find(a => a.id === slug) : null;
 
   return (
     <div className="min-h-screen">
       <div className="section-padding py-16 md:py-24">
-        {article ? (
-          <ArticlePage article={article} onBack={handleBack} />
+        {slug ? (
+          article ? <ArticlePage article={article} /> : <ArticleNotFound />
         ) : (
-          <BlogHub onReadArticle={handleRead} />
+          <BlogHub />
         )}
       </div>
+    </div>
+  );
+}
+
+function ArticleNotFound() {
+  return (
+    <div className="max-w-3xl mx-auto text-center py-20">
+      <h1 className="font-heading text-3xl font-extrabold text-gray-900 dark:text-white mb-4">Article Not Found</h1>
+      <p className="text-gray-500 dark:text-gray-400 mb-6">This article doesn't exist or may have moved.</p>
+      <Link to="/blog" className="text-sm font-semibold text-purple-600 dark:text-purple-400 hover:underline">← Back to Blog</Link>
     </div>
   );
 }
