@@ -28,6 +28,38 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Structured data: Organization + Software -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://cifusion.ai/#organization",
+          "name": "CIFusion.ai",
+          "legalName": "Allegiant InfoTech",
+          "url": "https://cifusion.ai/",
+          "logo": "https://cifusion.ai/logo.png",
+          "description": "AI-powered Lean Six Sigma and continuous improvement platform for mid-market operations teams."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "CIFusion.ai",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "url": "https://cifusion.ai/",
+          "publisher": { "@id": "https://cifusion.ai/#organization" },
+          "description": "Capture frontline improvement ideas, get GPT-4 Lean Six Sigma methodology recommendations, and track projects to proven ROI.",
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0",
+            "description": "Custom pricing — contact for a quote."
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
