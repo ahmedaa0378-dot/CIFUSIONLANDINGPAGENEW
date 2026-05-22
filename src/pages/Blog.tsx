@@ -442,16 +442,21 @@ function BlogHub({ onReadArticle }) {
             onClick={() => onReadArticle(article.id)}
             className="group rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 overflow-hidden hover:shadow-xl hover:border-purple-300 dark:hover:border-purple-500/40 transition-all cursor-pointer"
           >
-            {/* Image placeholder */}
-            <div className="h-48 bg-gradient-to-br from-purple-100 to-amber-50 dark:from-purple-900/30 dark:to-amber-900/15 flex items-center justify-center relative">
-              <div className="absolute top-4 left-4">
-                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${CATEGORY_STYLES[article.categoryColor]}`}>
+            {/* Branded gradient header */}
+            <div className="h-48 gradient-bg flex items-center justify-center relative overflow-hidden">
+              <div
+                className="absolute inset-0 opacity-[0.12]"
+                style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)', backgroundSize: '22px 22px' }}
+              />
+              <div className="absolute -top-12 -right-8 w-48 h-48 rounded-full bg-white/15 blur-3xl" />
+              <div className="absolute top-4 left-4 z-10">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/20 text-white backdrop-blur-sm">
                   {article.category}
                 </span>
               </div>
-              <span className="text-5xl opacity-30 group-hover:opacity-50 transition-opacity">📝</span>
-              <div className="absolute top-4 right-4">
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400">
+              <span className="relative z-10 font-heading text-2xl font-extrabold text-white/90 tracking-tight group-hover:scale-105 transition-transform">CIFusion</span>
+              <div className="absolute top-4 right-4 z-10">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-white backdrop-blur-sm">
                   ★ Featured
                 </span>
               </div>
@@ -545,11 +550,20 @@ function ArticlePage({ article, onBack }) {
         </p>
       </div>
 
-      {/* Featured image placeholder */}
-      <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-purple-50 to-amber-50 dark:from-purple-900/20 dark:to-amber-900/10 h-56 flex items-center justify-center mb-10">
-        <div className="text-center">
-          <span className="text-4xl opacity-30">📝</span>
-          <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">[Featured image placeholder]</p>
+{/* Branded gradient header */}
+      <div className="relative rounded-xl overflow-hidden h-56 mb-10 gradient-bg flex items-center justify-center">
+        {/* subtle dot texture */}
+        <div
+          className="absolute inset-0 opacity-[0.12]"
+          style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)', backgroundSize: '22px 22px' }}
+        />
+        {/* soft glow */}
+        <div className="absolute -top-16 -right-10 w-64 h-64 rounded-full bg-white/15 blur-3xl" />
+        <div className="relative z-10 flex flex-col items-center gap-3">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm">
+            {article.category}
+          </span>
+          <span className="font-heading text-2xl font-extrabold text-white/90 tracking-tight">CIFusion</span>
         </div>
       </div>
 
