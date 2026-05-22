@@ -3,7 +3,7 @@ import { useRef, useEffect, useState, useCallback } from 'react';
 import {
   Brain, Zap, ArrowRight, Lightbulb, GitBranch, CheckCircle2,
   Target, Layers, Globe, ChevronRight, Star, Factory, Heart, Pill, Car, Plane, Building2,
-  AlertTriangle, TrendingUp, Shield, BarChart3, Repeat, Quote,
+  AlertTriangle, TrendingUp, Shield, BarChart3, Repeat, Quote, Award,
 } from 'lucide-react';
 
 /* ============================================================
@@ -222,15 +222,13 @@ export default function Home() {
               <Link to="/demo" className="btn-primary inline-flex items-center gap-2">Request a Demo <ArrowRight className="w-4 h-4" /></Link>
               <Link to="/platform" className="btn-secondary inline-flex items-center gap-2">See How It Works <ChevronRight className="w-4 h-4" /></Link>
             </div>
-            <div className="mt-12 flex items-center gap-6">
-              <div className="flex -space-x-2">
-                {['A', 'M', 'S', 'K'].map((letter, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-[10px] font-bold text-white border-2 border-white dark:border-gray-950">{letter}</div>
-                ))}
+            <div className="mt-12 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center flex-shrink-0">
+                <Award className="w-5 h-5 text-white" />
               </div>
               <div>
-                <div className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-orange-500 text-orange-500" />)}</div>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Trusted by industry leaders</p>
+                <p className="text-sm font-semibold text-gray-900 dark:text-white leading-tight">Built by a Lean Six Sigma Master Black Belt</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">18+ years of real continuous improvement experience</p>
               </div>
             </div>
           </div>
