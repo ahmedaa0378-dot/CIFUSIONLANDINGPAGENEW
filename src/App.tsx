@@ -15,6 +15,7 @@ import Blog from './pages/Blog';
 import Privacy from './pages/Privacy';
 import Cookies from './pages/Cookies';
 import Terms from './pages/Terms';
+import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 
 
@@ -59,6 +60,7 @@ function AppContent() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
