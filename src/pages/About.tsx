@@ -9,9 +9,8 @@ const values = [
 ];
 
 const milestones = [
-  { year: '2023', event: 'Founded Allegiant InfoTech with a mission to democratize CI' },
+  { year: '2024', event: 'Founded Allegiant InfoTech with a mission to democratize CI' },
   { year: '2024', event: 'Built CIFusion MVP — AI-powered idea analysis engine goes live' },
-  { year: '2024', event: 'First pilot customer achieves $2.4M in documented savings' },
   { year: '2025', event: 'Enterprise launch with Azure SSO, multi-tenant, and replication' },
   { year: '2025', event: 'Expansion into healthcare, pharma, and aerospace verticals' },
   { year: '2026', event: 'AI coaching engine and interactive LSS templates launch' },
