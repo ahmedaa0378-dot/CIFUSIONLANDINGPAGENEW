@@ -8,4 +8,12 @@
   <url><loc>https://cifusion.ai/blog</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://cifusion.ai/demo</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://cifusion.ai/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cifusion.ai/blog/ai-data-analysis</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cifusion.ai/blog/dmaic-vs-kaizen</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cifusion.ai/blog/hidden-cost-excel</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cifusion.ai/blog/fishbone-ai-generator</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cifusion.ai/blog/five-whys-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cifusion.ai/blog/ci-culture</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cifusion.ai/blog/mid-market-enterprise-tools</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cifusion.ai/blog/idea-to-impact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
