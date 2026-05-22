@@ -10,19 +10,14 @@ const footerLinks = {
   Company: [
     { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
-    { name: 'Careers', path: '#' },
-    { name: 'Blog', path: '/blog' },
   ],
   Resources: [
-    { name: 'Help Center', path: '#' },
-    { name: 'Case Studies', path: '#' },
-    { name: 'Webinars', path: '#' },
-],
+    { name: 'Blog', path: '/blog' },
+  ],
   Legal: [
-    { name: 'Privacy Policy', path: '#' },
-    { name: 'Terms of Service', path: '#' },
-    { name: 'Security', path: '#' },
-    { name: 'GDPR', path: '#' },
+    { name: 'Privacy Policy', path: '/privacy' },
+    { name: 'Terms of Service', path: '/terms' },
+    { name: 'Cookie Policy', path: '/cookies' },
   ],
 };
 
@@ -48,7 +43,6 @@ export default function Footer() {
               <button className="btn-primary !py-2.5 !px-4 !text-xs whitespace-nowrap">Subscribe</button>
             </div>
           </div>
-
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
               <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-gray-900 dark:text-gray-100 mb-4">
@@ -69,18 +63,10 @@ export default function Footer() {
             </div>
           ))}
         </div>
-
         <div className="pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-gray-400 dark:text-gray-500">
             © {new Date().getFullYear()} CIFusion.ai by Allegiant InfoTech. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            {['LinkedIn', 'Twitter', 'YouTube'].map((social) => (
-              <a key={social} href="#" className="text-xs text-gray-400 dark:text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                {social}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>
