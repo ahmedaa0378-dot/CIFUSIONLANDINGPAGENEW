@@ -14,6 +14,7 @@ import { useState, useEffect } from 'react';
 import Blog from './pages/Blog';
 import Privacy from './pages/Privacy';
 import Cookies from './pages/Cookies';
+import Terms from './pages/Terms';
 import ScrollToTop from './components/ScrollToTop';
 
 
@@ -57,6 +58,7 @@ function AppContent() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookies" element={<Cookies />} />
+            <Route path="/terms" element={<Terms />} />
           </Routes>
         </main>
         <Footer />
