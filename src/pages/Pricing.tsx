@@ -98,7 +98,6 @@ const faqs = [
   { q: 'What AI model powers the recommendations?', a: "CIFusion uses OpenAI's GPT-4 for deep analysis and GPT-4o-mini for quick recommendations. The AI is configured with domain expertise across Lean Six Sigma methodologies including DMAIC, Kaizen, PDCA, 5 Whys, FMEA, A3 Problem Solving, Value Stream Mapping, Poka-Yoke, SMED, and TPM." },
   { q: 'How is our data protected?', a: 'Every tenant has row-level security isolation — your data is completely invisible to other tenants. Data is never shared across organizations or used to train AI models. Enterprise plans include SSO integration. Dedicated plans offer a completely separate database instance with custom data residency.' },
   { q: 'Is there a free pilot program?', a: 'Yes! We offer a 30-day guided pilot for qualified organizations. This includes full platform setup for one department, AI configuration, seed data from your operations, and dedicated support from our CI technology team.' },
-  { q: 'What does the $1,250 additional seat cover?', a: 'Employee accounts (idea submitters) are completely unlimited at no extra cost. The $1,250 applies only to Manager and CSI Head roles who need approval authority, project management access, advanced analytics, and AI analysis capabilities.' },
   { q: 'How long does implementation take?', a: 'Enterprise SSO: 3-4 weeks including identity provider integration. Dedicated: 4-6 weeks for database provisioning and security review. Custom: Scoped per project. We handle all the technical configuration.' },
   { q: 'Can we migrate from existing CI tools or spreadsheets?', a: "Absolutely. We provide data migration support to import your existing ideas, projects, and historical data from spreadsheets, SharePoint, or other CI platforms. Our team will map your existing workflows to CIFusion's approval structure." },
 ];
@@ -144,13 +143,6 @@ export default function Pricing() {
                     <tier.icon className={`w-5 h-5 ${tier.highlight ? 'text-white' : 'text-purple-500'}`} />
                   </div>
                   <h3 className="font-heading text-lg font-bold text-gray-900 dark:text-white">{tier.name}</h3>
-                </div>
-
-                <div className="mb-5">
-                  <div>
-                    <span className="font-heading text-2xl font-extrabold gradient-text">Custom Pricing</span>
-                    <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Tailored to your requirements</p>
-                  </div>
                 </div>
 
                 <p className="text-sm text-gray-500 dark:text-gray-500 leading-relaxed mb-6">{tier.description}</p>
