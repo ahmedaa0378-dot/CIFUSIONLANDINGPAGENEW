@@ -12,16 +12,23 @@ const interests = [
 ];
 
 const inputClass = "w-full px-4 py-3 rounded-lg border text-sm bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500/25 focus:border-purple-500/30";
-
+function escapeHtml(str: string): string {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 interface DemoForm {
   firstName: string; lastName: string; email: string; phone: string;
   company: string; jobTitle: string; companySize: string; industry: string;
-  interests: string[]; message: string;
+  interests: string[]; message: string; website: string;
 }
 
 function buildDemoNotificationHTML(form: DemoForm) {
   const interestsList = form.interests.length > 0
-    ? form.interests.map(i => `<span style="display:inline-block;background:#7C3AED15;color:#7C3AED;padding:3px 10px;border-radius:6px;font-size:12px;margin:2px 4px 2px 0;">${i}</span>`).join('')
+    ? form.interests.map(i => `<span style="display:inline-block;background:#7C3AED15;color:#7C3AED;padding:3px 10px;border-radius:6px;font-size:12px;margin:2px 4px 2px 0;">${escapeHtml(i)}</span>`).join('')
     : '<span style="color:#9ca3af;">None selected</span>';
 
   return `
@@ -84,8 +91,8 @@ function buildDemoAutoReplyHTML(firstName: string, company: string) {
         <h1 style="color: white; margin: 0; font-size: 20px; font-weight: 700;">Your Demo is on the Way!</h1>
       </div>
       <div style="padding: 32px;">
-        <p style="font-size: 14px; color: #374151; line-height: 1.7; margin: 0 0 16px;">Hi ${firstName},</p>
-        <p style="font-size: 14px; color: #374151; line-height: 1.7; margin: 0 0 16px;">Thank you for requesting a demo of CIFusion for <strong>${company || 'your organization'}</strong>. Our team is reviewing your request and will reach out within <strong>24 hours</strong> to schedule a personalized walkthrough.</p>
+        <p style="font-size: 14px; color: #374151; line-height: 1.7; margin: 0 0 16px;">Hi ${escapeHtml(firstName)},</p>
+        <p style="font-size: 14px; color: #374151; line-height: 1.7; margin: 0 0 16px;">Thank you for requesting a demo of CIFusion for <strong>${escapeHtml(company) || 'your organization'}</strong>. Our team is reviewing your request and will reach out within <strong>24 hours</strong> to schedule a personalized walkthrough.</p>
         <p style="font-size: 14px; color: #374151; line-height: 1.7; margin: 0 0 16px;">Here's what to expect in your demo:</p>
         <ul style="font-size: 14px; color: #374151; line-height: 2; margin: 0 0 16px; padding-left: 20px;">
           <li>Platform configured for your industry</li>
@@ -123,18 +130,20 @@ export default function Demo() {
   const [error, setError] = useState('');
   const [form, setForm] = useState<DemoForm>({
     firstName: '', lastName: '', email: '', phone: '', company: '', jobTitle: '',
-    companySize: '', industry: '', interests: [], message: '',
+    companySize: '', industry: '', interests: [], message: '', website: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Honeypot: real users never fill this hidden field
+    if (form.website) { setSubmitted(true); return; }
     setSending(true);
     setError('');
 
     try {
       // 1. Send notification to demo@cifusion.ai
       await sendEmail({
-        to: 'demo@cifusion.ai',
+     to: 'sales@cifusion.ai',
         subject: `[Demo Request] ${form.firstName} ${form.lastName} — ${form.company} (${form.industry})`,
         html: buildDemoNotificationHTML(form),
         from_alias: 'noreply',
@@ -150,7 +159,7 @@ export default function Demo() {
 
       setSubmitted(true);
     } catch (err) {
-      setError('Something went wrong. Please try again or email us directly at demo@cifusion.ai');
+      setError('Something went wrong. Please try again or email us directly at sales@cifusion.ai');
     } finally {
       setSending(false);
     }
@@ -230,6 +239,17 @@ export default function Demo() {
           {/* Right — Form */}
           <div className="lg:col-span-3">
             <form onSubmit={handleSubmit} className="card-glass p-8 md:p-10">
+              {/* Honeypot — hidden from humans, catches bots */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.website}
+                onChange={(e) => setForm({ ...form, website: e.target.value })}
+                style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                aria-hidden="true"
+              />
               {error && (
                 <div className="mb-5 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-sm text-red-600 dark:text-red-400">
                   {error}
