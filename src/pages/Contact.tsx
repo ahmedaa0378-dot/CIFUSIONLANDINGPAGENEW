@@ -28,7 +28,7 @@ function buildContactEmailHTML(form: { name: string; email: string; subject: str
           </tr>
           <tr>
             <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; color: #6b7280; vertical-align: top;">Email</td>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; color: #111827;"><a href="mailto:${form.email}" style="color: #7C3AED; text-decoration: none;">${form.email}</a></td>
+            <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; color: #111827;"><a href="mailto:${escapeHtml(form.email)}" style="color: #7C3AED; text-decoration: none;">${escapeHtml(form.email)}</a></td>
           </tr>
           <tr>
             <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; color: #6b7280; vertical-align: top;">Subject</td>
