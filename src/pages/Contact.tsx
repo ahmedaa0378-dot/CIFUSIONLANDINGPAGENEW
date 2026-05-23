@@ -5,7 +5,14 @@ const SUPABASE_URL = 'https://dtguigufwohethsajctz.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0Z3VpZ3Vmd29oZXRoc2FqY3R6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwMjQ4MDcsImV4cCI6MjA4NjYwMDgwN30.YXeipJl28C4AEtm1FEk-QMp10WSk3MJe4veswgjqmNM';
 
 const inputClass = "w-full px-4 py-3 rounded-lg border text-sm bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500/25 focus:border-purple-500/30";
-
+function escapeHtml(str: string): string {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 function buildContactEmailHTML(form: { name: string; email: string; subject: string; message: string }) {
   return `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb;">
@@ -17,7 +24,7 @@ function buildContactEmailHTML(form: { name: string; email: string; subject: str
         <table style="width: 100%; border-collapse: collapse;">
           <tr>
             <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; color: #6b7280; width: 120px; vertical-align: top;">Name</td>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; color: #111827; font-weight: 600;">${form.name}</td>
+            <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; color: #111827; font-weight: 600;">${escapeHtml(form.name)}</td>
           </tr>
           <tr>
             <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; color: #6b7280; vertical-align: top;">Email</td>
@@ -25,7 +32,7 @@ function buildContactEmailHTML(form: { name: string; email: string; subject: str
           </tr>
           <tr>
             <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; color: #6b7280; vertical-align: top;">Subject</td>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; color: #111827;">${form.subject}</td>
+            <td style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; color: #111827;">${escapeHtml(form.subject)}</td>
           </tr>
           <tr>
             <td style="padding: 10px 0; font-size: 13px; color: #6b7280; vertical-align: top;">Message</td>
@@ -76,10 +83,13 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '', website: '' });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Honeypot: real users never fill this hidden field
+    if (form.website) { setSubmitted(true); return; }
+    setSending(true);
     setSending(true);
     setError('');
 
@@ -162,7 +172,18 @@ export default function Contact() {
 
           {/* Right — Form */}
           <div className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="card-glass p-8 md:p-10">
+<form onSubmit={handleSubmit} className="card-glass p-8 md:p-10">
+              {/* Honeypot — hidden from humans, catches bots */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.website}
+                onChange={(e) => setForm({ ...form, website: e.target.value })}
+                style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                aria-hidden="true"
+              />
               {error && (
                 <div className="mb-5 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-sm text-red-600 dark:text-red-400">
                   {error}
